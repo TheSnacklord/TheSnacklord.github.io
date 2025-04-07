@@ -6,61 +6,77 @@
   <title>Contact | James Morton</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Reset default browser styling */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    /* Contact Page Specific Styles */
+    .contact-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-
-    /* Contact section styling */
-    #contact-phone {
-        background-color: #f4f4f4;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        max-width: 600px;
-        margin: 40px auto;
+    
+    .contact-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
-
-    #contact-phone h2 {
-        text-align: center;
-        color: #d32f2f; /* Red color for title */
-        margin-bottom: 10px;
+    
+    .contact-card {
+      background: rgba(211, 47, 47, 0.1);
+      border: 1px solid rgba(251, 192, 45, 0.2);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease;
     }
-
-    #contact-phone p {
-        color: #555; /* Dark gray text for better readability */
-        font-size: 1rem;
-        line-height: 1.6;
-        text-align: center;
+    
+    .contact-card:hover {
+      transform: translateY(-5px);
+      background: rgba(211, 47, 47, 0.2);
     }
-
+    
+    .contact-icon {
+      font-size: 2.5rem;
+      color: #fbc02d;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-title {
+      color: #fbc02d;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    
     .contact-info {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 15px;
-        font-size: 1.2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
-
-    .contact-info .phone-icon {
-        font-size: 2rem;
-        margin-right: 10px;
-        color: #d32f2f; /* Red phone icon */
+    
+    .contact-info a {
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px dotted #fbc02d;
+      transition: color 0.3s ease;
     }
-
-    .contact-info .phone-number {
-        font-weight: bold;
-        font-size: 1.5rem;
-        color: #333; /* Dark text for the phone number */
+    
+    .contact-info a:hover {
+      color: #fbc02d;
     }
-
-    #contact-phone p:last-child {
-        font-style: italic;
-        color: #777; /* Lighter gray for additional message */
+    
+    .contact-note {
+      margin-top: 2rem;
+      font-style: italic;
+      text-align: center;
+      opacity: 0.8;
     }
-</style>
+    
+    @media (max-width: 600px) {
+      .contact-methods {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -77,17 +93,38 @@
   </header>
 
   <main>
-    <section>
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:morton_wj@proton.me">morton_wj@proton.me</a></p>
-      <p>GitHub: <a href="https://github.com/TheSnacklord" target="_blank">github.com/TheSnacklord</a></p>
-     <p>Feel free to reach out to me via phone for any inquiries:</p>
-      <div class="contact-info">
-          <i class="phone-icon">&#128222;</i> <!-- Phone icon using unicode -->
-          <span class="phone-number">+1 (555) 123-4567</span>
+    <div class="contact-container">
+      <h2>Get In Touch</h2>
+      <p>I'm always open to discussing engineering opportunities, collaborations, or just chatting about technology.</p>
+      
+      <div class="contact-methods">
+        <div class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <h3 class="contact-title">Email</h3>
+          <div class="contact-info">
+            <a href="mailto:morton_wj@proton.me">morton_wj@proton.me</a>
+          </div>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">📱</div>
+          <h3 class="contact-title">Phone</h3>
+          <div class="contact-info">
+            <a href="tel:+14027065754">(402) 706-5754</a>
+          </div>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">💻</div>
+          <h3 class="contact-title">GitHub</h3>
+          <div class="contact-info">
+            <a href="https://github.com/TheSnacklord" target="_blank">github.com/TheSnacklord</a>
+          </div>
+        </div>
       </div>
-      <p>If I am unable to pick up, please leave a message, and I'll get back to you as soon as possible.</p>
-    </section>
+      
+      <p class="contact-note">Please leave a message if I don't answer - I'll get back to you within 24 hours.</p>
+    </div>
   </main>
 
   <footer>

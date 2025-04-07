@@ -3,8 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>James Morton | Home</title>
+  <title>James Morton | Mechanical Engineer</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Simple home-specific styles */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #fbc02d;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+    
+    .quick-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .quick-link {
+      padding: 0.8rem 1.5rem;
+      background-color: rgba(211, 47, 47, 0.3);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .quick-link:hover {
+      background-color: rgba(211, 47, 47, 0.5);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -21,9 +62,15 @@
   </header>
 
   <main>
-    <section>
-      <h2>Welcome</h2>
-      <p>Hi! I’m James Morton, an engineering student and developer. Explore my projects, experience, and feel free to reach out!</p>
+    <section class="hero">
+      <h2>Mechanical Engineering Student</h2>
+      <p>I design, build, and solve problems. Currently at Iowa State University with a passion for mechanical systems and innovative solutions.</p>
+      
+      <div class="quick-links">
+        <a href="projects.html" class="quick-link">View Projects</a>
+        <a href="resume.html" class="quick-link">See Resume</a>
+        <a href="contact.html" class="quick-link">Contact Me</a>
+      </div>
     </section>
   </main>
 
@@ -34,4 +81,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-

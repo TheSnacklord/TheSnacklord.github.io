@@ -8,9 +8,17 @@
   <style>
     .pdf-container {
       width: 100%;
-      height: 800px;
+      height: 1000px; /* Increased from 800px to 1000px */
       border: 1px solid #ccc;
       margin-top: 20px;
+      margin-bottom: 40px; /* Added more space below the viewer */
+    }
+    
+    /* Optional: Make the container responsive for smaller screens */
+    @media (max-width: 768px) {
+      .pdf-container {
+        height: 600px;
+      }
     }
   </style>
 </head>

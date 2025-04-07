@@ -5,6 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | James Morton</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Projects-specific styles */
+    .project-card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-left: 4px solid #fbc02d;
+    }
+    
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .project-title {
+      color: #fbc02d;
+      margin: 0;
+    }
+    
+    .project-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .skill-tag {
+      background: rgba(211, 47, 47, 0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .project-details {
+      margin-left: 1.5rem;
+    }
+    
+    .project-details li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -22,21 +66,57 @@
 
   <main>
     <section>
-      <h2>Projects</h2>
-
-      <h3>🏎 SAE Baja | Mechanical Design & Fabrication</h3>
-      <ul>
-        <li>Collaborated on the design and manufacturing of a competitive off-road vehicle</li>
-        <li>Used SolidWorks for modeling and CNC machines for fabrication</li>
-        <li>Contributed to tight deadlines, iterative prototyping, and performance testing</li>
-      </ul>
-
-      <h3>🛠 Technical Side Projects</h3>
-      <ul>
-        <li><strong>Unity 3D RPG Game:</strong> Developed physics-based mechanics in Unity using C#</li>
-        <li><strong>Python Simulation Tools:</strong> Built custom programs to solve a variety of problems</li>
-        <li><strong>Reverse Engineering:</strong> Modeled and analyzed real-world products using SolidWorks</li>
-      </ul>
+      <h2>Featured Projects</h2>
+      
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-title">SAE Baja Off-Road Vehicle</h3>
+        </div>
+        
+        <div class="project-skills">
+          <span class="skill-tag">SolidWorks</span>
+          <span class="skill-tag">CNC Machining</span>
+          <span class="skill-tag">FEA</span>
+          <span class="skill-tag">Team Collaboration</span>
+        </div>
+        
+        <ul class="project-details">
+        <li>Coordinate with team members to meet competition deadlines</li>
+        </ul>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-title">Unity RPG Game Engine</h3>
+        </div>
+        
+        <div class="project-skills">
+          <span class="skill-tag">C#</span>
+          <span class="skill-tag">Unity</span>
+          <span class="skill-tag">Physics Simulation</span>
+          <span class="skill-tag">Game Design</span>
+        </div>
+        
+        <ul class="project-details">
+          <li>Developed custom physics systems for character movement and combat</li>
+          <li>Optimized performance for low-end hardware</li>
+        </ul>
+      </div>
+      
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-title">Engineering Simulation Tools</h3>
+        </div>
+        
+        <div class="project-skills">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Numerical Analysis</span>
+        </div>
+        
+        <ul class="project-details">
+          <li>Developed thermal analysis tool for electronic components</li>
+        </ul>
+      </div>
     </section>
   </main>
 
