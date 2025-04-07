@@ -3,16 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>James Morton | Home</title>
+  <title>Resume | James Morton</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .pdf-container {
+      width: 100%;
+      height: 800px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <header>
     <nav>
       <h1>James Morton</h1>
       <ul>
+        <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="resume.html">Resume</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -21,8 +29,19 @@
 
   <main>
     <section>
-      <h2>Welcome</h2>
-      <p>Hi! I’m James Morton, an engineering student and developer. Explore my projects, experience, and feel free to reach out!</p>
+      <h2>Resume</h2>
+      <p><a href="Resume 2-3.pdf" download>Download My Resume (PDF)</a></p>
+
+      <!-- PDF Viewer -->
+      <div class="pdf-container">
+        <iframe
+          src="resume.pdf"
+          width="100%"
+          height="100%"
+          style="border: none;"
+          title="Resume PDF"
+        ></iframe>
+      </div>
     </section>
   </main>
 
@@ -33,4 +52,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
