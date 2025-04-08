@@ -4,3 +4,16 @@ h1{
 body {
 background-color: black;
 }
+ 
+.column {
+    float: left;
+    width: 30%;
+    padding: 5px;
+  }
+  
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+  } 
