@@ -4,10 +4,13 @@ h1{
 body {
 background-color: black;
 }
- 
+
+.pad{
+    padding: 10px;
+} 
 .column {
-    float: left;
-    width: 30%;
+    margin: auto;
+    width: 58%;
     padding: 5px;
   }
   
