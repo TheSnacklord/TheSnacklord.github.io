@@ -23,4 +23,55 @@ Hi! I'm James Morton, major in Aerospace engineering at Iowa State. I like movie
 <script src="script.js"></script>
 <footer>Sources: </footer>
 </body>
+</html> fix this code
+11:25 PM
+
+I'll help you fix this HTML code. Here are the issues I've identified and corrected:
+Fixed About Page
+Interactive artifact 
+Main fixes:
+
+    Moved <title> inside <head> - It was incorrectly placed before the head tag
+    Added essential meta tags - Charset and viewport for proper rendering
+    Fixed navigation structure - Removed incorrect <tr> and <th> table elements (should use <nav> for navigation)
+    Fixed semicolon syntax - Changed style="margin: 20px"; to proper style="margin: 20px;"
+    Added proper structure - <h1> is now inside <body> where it belongs
+    Used semantic HTML - Added <nav> element for better structure
+
+The page should now display correctly! You may also want to add an image source to the <img> tag when you have an image to display.
+Want to be notified when Claude responds?
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 style="color: antiquewhite;">about me</h1>
+  
+  <nav style="text-align: center;">
+    <a style="margin: 20px; display: inline-block;" href="about.html">about me</a>
+    <a style="margin: 20px; display: inline-block;" href="projects.html">projects</a>
+    <a style="margin: 20px; display: inline-block;" href="essays.html">essays</a>
+  </nav>
+  
+  <div>
+    <p style="color: antiquewhite; margin: 20px;">
+      Hi! I'm James Morton, major in Aerospace engineering at Iowa State. I like movies, video games, music. I like martial arts and enjoy training Jiu-Jitsu and Boxing. I love pretty much all food.
+    </p>
+  </div>
+  
+  <div style="text-align: center;">
+    <img width="90%" src="" alt="about">
+  </div>
+  
+  <script src="script.js"></script>
+  
+  <footer>Sources: </footer>
+</body>
 </html>
