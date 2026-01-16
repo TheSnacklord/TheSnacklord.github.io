@@ -1,38 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-  <title>projects</title>
 <head>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: antiquewhite;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: antiquewhite;
+    }
+
+    p {
+      color: antiquewhite;
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 20px 0 40px 0;
+    }
+
+    .projects {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .projects a {
+      color: #e0e0e0;
+      text-decoration: none;
+      margin: 20px;
+      font-size: 1.1rem;
+      display: inline-block;
+      transition: color 0.3s ease;
+    }
+
+    .projects a:hover {
+      color: antiquewhite;
+    }
+
+    .project-row {
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 15px 0;
+      }
+
+      .projects a {
+        display: block;
+        margin: 15px 0;
+      }
+    }
+  </style>
 </head>
-<h1 style="color: antiquewhite;">projects</h1>
 <body>
-<div style="text-align: center;">
-  <tr>
-  <th><a style="margin: 20px"; href="about.html">about me</a></th>
-  <th><a style="margin: 20px"; href="projects.html">projects</a></th>
-  <th><a style="margin: 20px"; href="essays.html">essays</a></th>
-  </tr>
-</div>
-<p style="color: antiquewhite; text-align: center;">A collection of some personal and college projects</p>
-<script src="script.js"></script>
-<div style="text-align: center;">
-<tr>
-  <th><a style="margin: 20px"; href="projects/unityrpg.html">The Unity Video Game</a></th>
-  <th><a style="margin: 20px"; href="projects/reverseeng.html">Reverse Engineering</a></th>
-  <th><a style="margin: 20px"; href="projects/thermalinsulation.html">Python Solutions to Heat Equation in Copper Wire</a></th>
-</tr>
-<br></br>
-  <tr>
-    <th><a style="margin: 20px"; href="projects/slivercnc.html">Command and Control Server</a></th>
-    <th><a style="margin: 20px"; href="projects/fullstack.html">The Fullstack Webpage</a></th>
-    <th><a style="margin: 20px"; href="projects/jellyfin.html">Jellyfin</a></th>
-  </tr>
-  <br></br>
-    <tr>
-      <th><a style="margin: 20px"; href="projects/videogserver.html">Video Game Servers</a></th>
-      <th></th>
-      <th></th>
-    </tr>
+  <div class="container">
+    <h1>projects</h1>
+    
+    <nav>
+      <a href="about.html">about me</a>
+      <a href="projects.html">projects</a>
+      <a href="essays.html">essays</a>
+    </nav>
+
+    <p>A collection of some personal and college projects</p>
+
+    <div class="projects">
+      <div class="project-row">
+        <a href="projects/unityrpg.html">The Unity Video Game</a>
+        <a href="projects/reverseeng.html">Reverse Engineering</a>
+        <a href="projects/thermalinsulation.html">Python Solutions to Heat Equation in Copper Wire</a>
+      </div>
+
+      <div class="project-row">
+        <a href="projects/slivercnc.html">Command and Control Server</a>
+        <a href="projects/fullstack.html">The Fullstack Webpage</a>
+        <a href="projects/jellyfin.html">Jellyfin</a>
+      </div>
+
+      <div class="project-row">
+        <a href="projects/videogserver.html">Video Game Servers</a>
+      </div>
     </div>
+  </div>
+  
+  <script src="script.js"></script>
 </body>
 </html>
