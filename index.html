@@ -1,4 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Index</title>
+<style>
+:root {
+  --bg: #05060f;
+  --text: #f2f4f8;
+  --tile: #000000;
+  --glow: rgba(255, 255, 255, 0.85);
+  --ring: #ffffff;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+#space { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choices {
+  display: flex;
+  gap: clamp(24px, 6vw, 96px);
+  padding: 24px;
+  width: 100%;
+  max-width: 1300px;
+  justify-content: center;
+}
+.choice {
+  flex: 1 1 0;
+  max-width: 540px;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  outline: none;
+}
+.tile {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 9%;
+  background: var(--tile);
+  overflow: hidden;
+  transition: box-shadow .25s ease, transform .25s ease, filter .25s ease;
+  filter: brightness(.85);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.18);
+}
+.tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.choice:hover .tile,
+.choice:focus-visible .tile {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+  box-shadow: 0 0 0 3px var(--ring), 0 0 40px 8px var(--glow);
+}
+.label {
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile { transition: none; }
+  .choice:hover .tile, .choice:focus-visible .tile { transform: none; }
+}
+</style>
+</head>
+<body>
+  <canvas id="space" aria-hidden="true"></canvas>
+  <main class="choices">
+    <a class="choice" href="#engineering-apps">
+      <div class="tile"><!-- <img src="engineering.jpg" alt=""> --></div>
+      <span class="label">Engineering Apps</span>
+    </a>
+    <a class="choice" href="#portfolio">
+      <div class="tile"><!-- <img src="portfolio.jpg" alt=""> --></div>
+      <span class="label">Portfolio</span>
+    </a>
+  </main>
+<script>
+(function () {
+  var c = document.getElementById('space'), g = c.getContext('2d');
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  function draw() {
+    seed = 7;
+    var w = c.width = window.innerWidth, h = c.height = window.innerHeight;
+    g.fillStyle = '#04050d'; g.fillRect(0, 0, w, h);
+    var neb = [
+      [.22,.28,.55,'90,60,200',.30], [.78,.70,.60,'200,60,140',.22],
+      [.60,.20,.45,'40,120,220',.20], [.30,.85,.50,'80,40,160',.22]
+    ];
+    neb.forEach(function (n) {
+      var r = n[2] * Math.max(w, h), x = n[0] * w, y = n[1] * h;
+      var gr = g.createRadialGradient(x, y, 0, x, y, r);
+      gr.addColorStop(0, 'rgba(' + n[3] + ',' + n[4] + ')');
+      gr.addColorStop(1, 'rgba(' + n[3] + ',0)');
+      g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    });
+    var count = Math.round(w * h / 2200);
+    for (var i = 0; i < count; i++) {
+      var x = rnd() * w, y = rnd() * h, s = Math.pow(rnd(), 4);
+      var r = .4 + s * 1.6, a = .35 + s * .65;
+      var tint = rnd();
+      g.fillStyle = tint < .15 ? 'rgba(170,200,255,' + a + ')' : tint < .3 ? 'rgba(255,220,180,' + a + ')' : 'rgba(255,255,255,' + a + ')';
+      g.beginPath(); g.arc(x, y, r, 0, 6.2832); g.fill();
+      if (s > .85) {
+        var gl = g.createRadialGradient(x, y, 0, x, y, r * 6);
+        gl.addColorStop(0, 'rgba(255,255,255,.35)'); gl.addColorStop(1, 'rgba(255,255,255,0)');
+        g.fillStyle = gl; g.fillRect(x - r * 6, y - r * 6, r * 12, r * 12);
+      }
+    }
+  }
+  draw();
+  window.addEventListener('resize', draw);
+})();
+</script>
+</body>
 </html>
