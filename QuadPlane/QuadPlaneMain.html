@@ -6,7 +6,7 @@
 <title>QuadPlane Ares | James Morton</title>
 <style>
 :root {
-  --bg: #2f7ccc;
+  --bg: #1c1f24;
   --text: #f2f4f8;
   --tile: transparent;
   --glow: rgba(255, 255, 255, 0.85);
@@ -16,12 +16,11 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 *, *::before, *::after { box-sizing: border-box; }
-#space { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
 html, body { min-height: 100%; margin: 0; }
 body {
   background: var(--bg);
   color: var(--text);
-  text-shadow: 0 1px 8px rgba(0,30,70,.35);
+  text-shadow: 0 1px 8px rgba(0,0,0,.4);
   font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
@@ -32,7 +31,7 @@ body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 5;
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px;
   padding: calc(10px + env(safe-area-inset-top, 0px)) 24px 10px;
-  background: rgba(10, 38, 78, .55);
+  background: rgba(0, 0, 0, .45);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,.14);
@@ -55,7 +54,7 @@ body {
   width: 100%; margin-top: 8px;
   padding: 36px 24px calc(36px + env(safe-area-inset-bottom, 0px));
   text-align: center;
-  background: rgba(10,38,78,.6);
+  background: rgba(0,0,0,.5);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255,255,255,.14);
 }
@@ -78,13 +77,6 @@ body {
   font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
   border: 1px solid rgba(255,255,255,.4); color: rgba(255,255,255,.93);
 }
-.sky { position: relative; width: 100%; max-width: 820px; height: 380px; margin: 24px auto 0; }
-#trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.flyer { position: absolute; left: 50%; top: 50%; width: 180px; height: 135px; margin: -68px 0 0 -90px; will-change: transform; }
-.flyer svg { width: 100%; height: 100%; display: block; overflow: visible; }
-.flyer .blades { animation: spin .3s linear infinite; }
-.blades { transform-box: view-box; }
-@keyframes spin { to { transform: rotate(360deg); } }
 .section { width: 100%; max-width: 900px; padding: 0 24px; }
 .section-title {
   margin: 56px 0 0; text-align: center; font-size: .85rem; font-weight: 600;
@@ -94,7 +86,7 @@ body {
 .specs { display: grid; gap: 16px; margin-top: 24px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .spec {
   padding: 18px 20px;
-  background: rgba(8,32,66,.38);
+  background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.2);
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
 }
@@ -104,7 +96,7 @@ body {
 .shot {
   aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center;
   font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.93);
-  background: rgba(8,32,66,.38); border: 1px dashed rgba(255,255,255,.35); overflow: hidden;
+  background: rgba(255,255,255,.05); border: 1px dashed rgba(255,255,255,.35); overflow: hidden;
 }
 .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .contact { margin-top: 72px; }
@@ -113,13 +105,9 @@ body {
   .topbar a.brand { padding-left: 20px; }
   .navlinks { justify-content: center; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .flyer .blades { animation: none; }
-}
 </style>
 </head>
 <body>
-  <canvas id="space" aria-hidden="true"></canvas>
   <nav class="topbar">
     <a class="brand" href="../index.html">James Morton</a>
     <div class="navlinks">
@@ -133,57 +121,6 @@ body {
     <h1>QuadPlane Ares</h1>
     <p class="tagline">VTOL Fixed Wing Aircraft</p>
     <span class="badge">In Progress</span>
-    <div class="sky" aria-hidden="true">
-      <canvas id="trail"></canvas>
-      <div class="flyer" id="flyer">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mock illustration of a quadplane">
-          <defs>
-            <marker id="ahW" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ffffff"/></marker>
-            <marker id="ahY" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ffe27a"/></marker>
-          </defs>
-          <g stroke-width="5" stroke-linecap="round" fill="none">
-            <line x1="200" y1="34" x2="200" y2="-60" stroke="#fff" marker-end="url(#ahW)"/>
-            <g stroke="#ffe27a">
-              <line x1="84" y1="49" x2="34" y2="-1" marker-end="url(#ahY)"/>
-              <line x1="316" y1="49" x2="366" y2="-1" marker-end="url(#ahY)"/>
-              <line x1="84" y1="211" x2="34" y2="261" marker-end="url(#ahY)"/>
-              <line x1="316" y1="211" x2="366" y2="261" marker-end="url(#ahY)"/>
-            </g>
-          </g>
-          <g font-size="26" font-weight="700" fill="#fff" font-family="Helvetica, Arial, sans-serif">
-            <text x="214" y="-44">V</text>
-          </g>
-          <g fill="#1a1d24" stroke="rgba(255,255,255,.85)" stroke-width="1.5" stroke-linejoin="round">
-            <rect x="102" y="70" width="6" height="120"/>
-            <rect x="292" y="70" width="6" height="120"/>
-            <polygon points="50,122 200,104 350,122 350,150 200,154 50,150"/>
-            <polygon points="160,196 240,196 238,210 162,210"/>
-            <polygon points="200,34 209,60 209,200 200,216 191,200 191,60"/>
-          </g>
-          <line x1="200" y1="104" x2="200" y2="154" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
-          <g>
-          <circle cx="105" cy="70" r="30" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.55)" stroke-width="1"/>
-          <g class="blades" style="transform-origin:105px 70px"><line x1="77" y1="70" x2="133" y2="70" stroke="#fff" stroke-width="3" stroke-linecap="round"/><line x1="105" y1="42" x2="105" y2="98" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
-          <circle cx="105" cy="70" r="4" fill="#fff"/>
-        </g>
-          <g>
-          <circle cx="295" cy="70" r="30" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.55)" stroke-width="1"/>
-          <g class="blades" style="transform-origin:295px 70px"><line x1="267" y1="70" x2="323" y2="70" stroke="#fff" stroke-width="3" stroke-linecap="round"/><line x1="295" y1="42" x2="295" y2="98" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
-          <circle cx="295" cy="70" r="4" fill="#fff"/>
-        </g>
-          <g>
-          <circle cx="105" cy="190" r="30" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.55)" stroke-width="1"/>
-          <g class="blades" style="transform-origin:105px 190px"><line x1="77" y1="190" x2="133" y2="190" stroke="#fff" stroke-width="3" stroke-linecap="round"/><line x1="105" y1="162" x2="105" y2="218" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
-          <circle cx="105" cy="190" r="4" fill="#fff"/>
-        </g>
-          <g>
-          <circle cx="295" cy="190" r="30" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.55)" stroke-width="1"/>
-          <g class="blades" style="transform-origin:295px 190px"><line x1="267" y1="190" x2="323" y2="190" stroke="#fff" stroke-width="3" stroke-linecap="round"/><line x1="295" y1="162" x2="295" y2="218" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
-          <circle cx="295" cy="190" r="4" fill="#fff"/>
-        </g>
-        </svg>
-      </div>
-    </div>
   </section>
   <section class="section">
     <h2 class="section-title">Overview</h2>
@@ -218,136 +155,5 @@ body {
     </div>
     <small>© 2026 James Morton</small>
   </footer>
-<script>
-(function () {
-  var c = document.getElementById('space'), g = c.getContext('2d');
-  var bg = document.createElement('canvas'), b = bg.getContext('2d');
-  var w = 0, h = 0, seed = 11;
-  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
-
-  function drawScene() {
-    seed = 11;
-    w = c.width = bg.width = window.innerWidth;
-    h = c.height = bg.height = window.innerHeight;
-    var gr = b.createLinearGradient(0, 0, 0, h);
-    gr.addColorStop(0, '#1d5ea8'); gr.addColorStop(.55, '#3f8fd4'); gr.addColorStop(1, '#6fb4e8');
-    b.fillStyle = gr; b.fillRect(0, 0, w, h);
-    var sx = w * .86, sy = h * .08, sr = Math.max(w, h) * .4;
-    var sun = b.createRadialGradient(sx, sy, 0, sx, sy, sr);
-    sun.addColorStop(0, 'rgba(255,250,220,.65)'); sun.addColorStop(1, 'rgba(255,250,220,0)');
-    b.fillStyle = sun; b.fillRect(0, 0, w, h);
-    var clouds = Math.round(w / 240) + 4;
-    for (var i = 0; i < clouds; i++) {
-      var cx = rnd() * w, cy = rnd() * h, puffsN = 6 + Math.floor(rnd() * 4);
-      for (var k = 0; k < puffsN; k++) {
-        var px = cx + (rnd() - .5) * 220, py = cy + (rnd() - .5) * 40, r = 30 + rnd() * 55;
-        var cg = b.createRadialGradient(px, py, 0, px, py, r);
-        cg.addColorStop(0, 'rgba(255,255,255,.5)'); cg.addColorStop(1, 'rgba(255,255,255,0)');
-        b.fillStyle = cg; b.fillRect(px - r, py - r, r * 2, r * 2);
-      }
-    }
-  }
-
-  function rocket(x, yb, u, flame) {
-    var bw = 28 * u, bh = 130 * u;
-    if (flame > 0) {
-      var L = (80 + Math.random() * 30) * u * flame, W = 13 * u * (.6 + .4 * flame);
-      var fg = g.createLinearGradient(0, yb, 0, yb + L);
-      fg.addColorStop(0, 'rgba(255,250,200,.98)'); fg.addColorStop(.35, 'rgba(255,170,40,.92)'); fg.addColorStop(1, 'rgba(255,80,20,0)');
-      g.fillStyle = fg;
-      g.beginPath(); g.moveTo(x - W, yb); g.quadraticCurveTo(x, yb + L * 1.1, x + W, yb); g.closePath(); g.fill();
-    }
-    g.fillStyle = '#b8322a';
-    g.beginPath(); g.moveTo(x - bw / 2, yb - 40 * u); g.lineTo(x - bw / 2 - 16 * u, yb + 2 * u); g.lineTo(x - bw / 2, yb); g.closePath(); g.fill();
-    g.beginPath(); g.moveTo(x + bw / 2, yb - 40 * u); g.lineTo(x + bw / 2 + 16 * u, yb + 2 * u); g.lineTo(x + bw / 2, yb); g.closePath(); g.fill();
-    g.fillStyle = '#f2f3f5'; g.fillRect(x - bw / 2, yb - bh, bw, bh);
-    g.fillStyle = 'rgba(0,0,0,.14)'; g.fillRect(x, yb - bh, bw / 2, bh);
-    g.fillStyle = '#d8392b';
-    g.beginPath(); g.moveTo(x - bw / 2, yb - bh); g.quadraticCurveTo(x - bw / 2 + 2 * u, yb - bh - 34 * u, x, yb - bh - 46 * u);
-    g.quadraticCurveTo(x + bw / 2 - 2 * u, yb - bh - 34 * u, x + bw / 2, yb - bh); g.closePath(); g.fill();
-    g.fillStyle = '#20252d';
-    g.fillRect(x - bw / 2, yb - bh * .62, bw, 9 * u);
-    g.fillRect(x - bw / 2, yb - bh * .22, bw, 9 * u);
-    g.fillStyle = '#4aa3df'; g.beginPath(); g.arc(x, yb - bh * .82, 5 * u, 0, 6.2832); g.fill();
-    g.strokeStyle = '#20252d'; g.lineWidth = Math.max(1, 1.5 * u); g.stroke();
-    g.fillStyle = '#3d4650'; g.fillRect(x - 7 * u, yb, 14 * u, 4 * u);
-  }
-
-  var puffs = [], LIFE = 5200, start = null, lastEmit = 0;
-  var FLIGHT = 9500, CYCLE = 12500;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function frame(now) {
-    if (start === null) start = now;
-    var T = reduce ? FLIGHT * .5 : (now - start) % CYCLE;
-    var u = Math.max(.6, h / 800), x = Math.min(w - 60, w * .88);
-    var yStart = h + 200 * u, yEnd = -280 * u;
-    g.drawImage(bg, 0, 0);
-
-    var flying = T < FLIGHT, yb = yStart + (yEnd - yStart) * Math.min(1, T / FLIGHT);
-
-    if (flying && !reduce && now - lastEmit > 30) {
-      lastEmit = now;
-      puffs.push({ x: x + (Math.random() - .5) * 4 * u, y: yb + 8 * u, vx: (Math.random() - .5) * .012, r: 6 * u, grow: 34 * u, a: .6, born: now });
-    }
-    puffs = puffs.filter(function (p) { return now - p.born < LIFE; });
-
-    for (var i = 0; i < puffs.length; i++) {
-      var p = puffs[i], age = now - p.born, k = age / LIFE, r = p.r + k * p.grow, al = p.a * Math.pow(1 - k, 1.3);
-      var cx = p.x + p.vx * age, pg = g.createRadialGradient(cx, p.y, 0, cx, p.y, r);
-      pg.addColorStop(0, 'rgba(250,251,253,' + al.toFixed(3) + ')'); pg.addColorStop(1, 'rgba(250,251,253,0)');
-      g.fillStyle = pg; g.fillRect(cx - r, p.y - r, r * 2, r * 2);
-    }
-    if (flying) rocket(x, yb, u, 1);
-
-    if (!reduce) requestAnimationFrame(frame);
-  }
-
-  function resize() { drawScene(); if (reduce) frame(0); }
-  resize();
-  window.addEventListener('resize', resize);
-  if (!reduce) requestAnimationFrame(frame);
-})();
-</script>
-<script>
-(function () {
-  var sky = document.querySelector('.sky'), f = document.getElementById('flyer'), tc = document.getElementById('trail');
-  if (!sky || !f || !tc || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var tg = tc.getContext('2d'), W = 0, H = 0;
-  function size() { W = tc.width = sky.clientWidth; H = tc.height = sky.clientHeight; }
-  size(); window.addEventListener('resize', size);
-  var t = 0, last = null, lastEmit = 0, puffs = [], LIFE = 2800;
-  function emit(x, y, r, a, now) { puffs.push({ x: x, y: y, r: r, a: a, born: now }); }
-  function frame(now) {
-    if (last === null) last = now;
-    t += (now - last) * 0.0004; last = now;
-    var A = Math.max(60, W / 2 - 150), B = Math.max(40, H / 2 - 120);
-    var x = A * Math.sin(t), y = B * Math.sin(2 * t);
-    var dx = A * Math.cos(t), dy = 2 * B * Math.cos(2 * t);
-    var ang = Math.atan2(dy, dx) * 180 / Math.PI + 90;
-    f.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + ang.toFixed(1) + 'deg)';
-
-    var len = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / len, uy = dy / len, px = -uy, py = ux;
-    var cx = W / 2 + x, cy = H / 2 + y;
-    if (now - lastEmit > 28) {
-      lastEmit = now;
-      emit(cx - ux * 55, cy - uy * 55, 9, .5, now);
-      emit(cx - ux * 24 + px * 62, cy - uy * 24 + py * 62, 4, .4, now);
-      emit(cx - ux * 24 - px * 62, cy - uy * 24 - py * 62, 4, .4, now);
-    }
-    tg.clearRect(0, 0, W, H);
-    puffs = puffs.filter(function (p) { return now - p.born < LIFE; });
-    for (var i = 0; i < puffs.length; i++) {
-      var p = puffs[i], k = (now - p.born) / LIFE, r = p.r + k * 22, al = p.a * Math.pow(1 - k, 1.4);
-      var g = tg.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
-      g.addColorStop(0, 'rgba(255,255,255,' + al.toFixed(3) + ')');
-      g.addColorStop(1, 'rgba(255,255,255,0)');
-      tg.fillStyle = g; tg.fillRect(p.x - r, p.y - r, r * 2, r * 2);
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-</script>
 </body>
 </html>

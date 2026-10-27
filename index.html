@@ -6,7 +6,7 @@
 <title>Index</title>
 <style>
 :root {
-  --bg: #1f4a2e;
+  --bg: #1c1f24;
   --text: #f2f4f8;
   --tile: transparent;
   --glow: rgba(255, 255, 255, 0.85);
@@ -16,12 +16,11 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 *, *::before, *::after { box-sizing: border-box; }
-#space { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
 html, body { min-height: 100%; margin: 0; }
 body {
   background: var(--bg);
   color: var(--text);
-  text-shadow: 0 1px 8px rgba(0,20,10,.5);
+  text-shadow: 0 1px 8px rgba(0,0,0,.4);
   font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
@@ -32,7 +31,7 @@ body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 5;
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px;
   padding: calc(10px + env(safe-area-inset-top, 0px)) 24px 10px;
-  background: rgba(8, 28, 18, .6);
+  background: rgba(0, 0, 0, .45);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,.14);
@@ -62,7 +61,7 @@ body {
   text-align: center; padding: 12px;
   font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
   color: rgba(255,255,255,.93);
-  background: rgba(8,28,18,.45);
+  background: rgba(255,255,255,.05);
   border: 1px dashed rgba(255,255,255,.4);
   overflow: hidden;
 }
@@ -75,7 +74,7 @@ body {
   width: 100%; margin-top: 8px;
   padding: 36px 24px calc(36px + env(safe-area-inset-bottom, 0px));
   text-align: center;
-  background: rgba(8,28,18,.62);
+  background: rgba(0,0,0,.5);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255,255,255,.14);
 }
@@ -106,7 +105,7 @@ body {
 }
 .card {
   padding: 24px; text-align: left;
-  background: rgba(8,28,18,.45);
+  background: rgba(255,255,255,.05);
   border: 1px dashed rgba(255,255,255,.3);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -198,7 +197,6 @@ body {
 </style>
 </head>
 <body>
-  <canvas id="space" aria-hidden="true"></canvas>
   <nav class="topbar">
     <a class="brand" href="#about-me">James Morton</a>
     <div class="navlinks">
@@ -285,174 +283,5 @@ body {
     </div>
     <small>© 2026 James Morton</small>
   </footer>
-<script>
-(function () {
-  var c = document.getElementById('space'), g = c.getContext('2d');
-  var bg = document.createElement('canvas'), b = bg.getContext('2d');
-  var w = 0, h = 0, seed = 5;
-  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
-
-  function facility(fx, yg, f, roadX) {
-    function R(x, y, ww, hh, col) { b.fillStyle = col; b.fillRect(fx + x * f, yg + y * f, ww * f, hh * f); }
-    // access road from the pad to the facility
-    b.fillStyle = 'rgba(70,75,80,.75)'; b.fillRect(roadX, yg - 1, fx + 520 * f - roadX, 7 * f + 2);
-    b.fillStyle = 'rgba(230,230,200,.5)'; b.fillRect(roadX, yg + 2 * f, fx + 520 * f - roadX, Math.max(1, f));
-    // large assembly building
-    R(0, -150, 150, 150, '#c9ced6');
-    R(105, -150, 45, 150, '#aeb5bf');
-    R(0, -150, 150, 8, '#8d95a1');
-    for (var i = 1; i < 10; i++) R(i * 15 - 1, -142, 1.2, 142, 'rgba(90,100,115,.35)');
-    // U.S. flag on the building face
-    var flX = 14, flY = -136, flW = 52, flH = 27.4, stH = flH / 13;
-    for (var sIdx = 0; sIdx < 13; sIdx++) R(flX, flY + sIdx * stH, flW, stH + .2, sIdx % 2 === 0 ? '#c0392b' : '#f5f5f5');
-    R(flX, flY, flW * .4, stH * 7, '#1d3a6b');
-    b.fillStyle = '#ffffff';
-    for (var sr = 0; sr < 4; sr++) for (var sc = 0; sc < 5; sc++) b.fillRect(fx + (flX + 2 + sc * 4) * f, yg + (flY + 2 + sr * 3.4) * f, 1.3 * f, 1.3 * f);
-    R(112, -112, 26, 112, '#6b7480');
-    // support and control buildings
-    R(150, -44, 92, 44, '#b6bcc6'); R(150, -44, 92, 5, '#8d95a1');
-    R(160, -30, 72, 7, '#2a3442');
-    R(258, -62, 76, 62, '#c3c8d0'); R(258, -62, 76, 6, '#8d95a1');
-    for (var j = 0; j < 4; j++) R(266 + j * 17, -46, 11, 9, '#2a3442');
-    R(270, -24, 20, 24, '#6b7480');
-    // radar dish
-    R(366, -52, 4, 52, '#7a838f');
-    b.fillStyle = '#dde1e6';
-    b.beginPath(); b.moveTo(fx + 346 * f, yg - 66 * f);
-    b.quadraticCurveTo(fx + 368 * f, yg - 36 * f, fx + 390 * f, yg - 66 * f);
-    b.closePath(); b.fill();
-    b.strokeStyle = '#7a838f'; b.lineWidth = Math.max(1, 1.6 * f);
-    b.beginPath(); b.moveTo(fx + 368 * f, yg - 52 * f); b.lineTo(fx + 368 * f, yg - 82 * f); b.stroke();
-    // spherical fuel tanks
-    [[418, 20], [462, 20]].forEach(function (t) {
-      var cx = fx + t[0] * f, cy = yg - (t[1] + 14) * f, r = t[1] * f;
-      b.strokeStyle = '#7a838f'; b.lineWidth = Math.max(1, 1.8 * f);
-      b.beginPath(); b.moveTo(cx - r * .6, cy + r * .8); b.lineTo(cx - r * .8, yg); b.moveTo(cx + r * .6, cy + r * .8); b.lineTo(cx + r * .8, yg); b.stroke();
-      var sg = b.createRadialGradient(cx - r * .35, cy - r * .35, r * .1, cx, cy, r);
-      sg.addColorStop(0, '#ffffff'); sg.addColorStop(1, '#a9b0ba');
-      b.fillStyle = sg; b.beginPath(); b.arc(cx, cy, r, 0, 6.2832); b.fill();
-    });
-    // antenna mast with beacon
-    R(504, -125, 3, 125, '#7a838f');
-    for (var k = 0; k < 8; k++) R(500, -118 + k * 15, 11, 1.5, '#7a838f');
-    b.fillStyle = '#ff4d3d'; b.beginPath(); b.arc(fx + 505.5 * f, yg - 127 * f, 3 * f, 0, 6.2832); b.fill();
-  }
-
-  function drawScene() {
-    seed = 5;
-    w = c.width = bg.width = window.innerWidth;
-    h = c.height = bg.height = window.innerHeight;
-    var sky = b.createLinearGradient(0, 0, 0, h * .8);
-    sky.addColorStop(0, '#2f6fae'); sky.addColorStop(1, '#a9d4ee');
-    b.fillStyle = sky; b.fillRect(0, 0, w, h);
-    var sx = w * .85, sy = h * .1, sr = Math.max(w, h) * .35;
-    var sun = b.createRadialGradient(sx, sy, 0, sx, sy, sr);
-    sun.addColorStop(0, 'rgba(255,250,220,.6)'); sun.addColorStop(1, 'rgba(255,250,220,0)');
-    b.fillStyle = sun; b.fillRect(0, 0, w, h);
-    var gr = b.createLinearGradient(0, h * .8, 0, h);
-    gr.addColorStop(0, '#4f7f3a'); gr.addColorStop(.5, '#366329'); gr.addColorStop(1, '#223f1c');
-    b.fillStyle = gr; b.fillRect(0, h * .8, w, h * .2);
-    var fu = Math.max(.6, h / 800), ff = Math.min(fu, w / 1000);
-    facility(Math.max(w * .42, 200 * fu), h * .8 + 2 * fu, ff, Math.max(30, w * .16 - 40));
-    for (var i = 0; i < w * h / 700; i++) {
-      var gx = rnd() * w, gy = h * .8 + rnd() * h * .2, gl = 5 + rnd() * 10 * (gy / h);
-      b.strokeStyle = rnd() < .5 ? 'rgba(120,170,80,.45)' : 'rgba(20,50,15,.45)';
-      b.lineWidth = 1; b.beginPath(); b.moveTo(gx, gy); b.lineTo(gx + (rnd() - .5) * 4, gy - gl); b.stroke();
-    }
-  }
-
-  function tower(x, y0, u) {
-    g.fillStyle = '#56606c';
-    var tx = x + 30 * u, th = 165 * u;
-    g.fillRect(tx, y0 - th, 5 * u, th);
-    g.fillRect(tx + 14 * u, y0 - th, 5 * u, th);
-    g.strokeStyle = '#56606c'; g.lineWidth = Math.max(1, 2 * u);
-    g.beginPath();
-    for (var i = 0; i < 6; i++) {
-      var ya = y0 - th + i * th / 6, yb = ya + th / 6;
-      g.moveTo(tx + 2 * u, ya); g.lineTo(tx + 16 * u, yb);
-      g.moveTo(tx + 16 * u, ya); g.lineTo(tx + 2 * u, yb);
-    }
-    g.stroke();
-    g.fillRect(tx - 24 * u, y0 - th * .62, 26 * u, 4 * u);
-    g.fillRect(tx - 24 * u, y0 - th * .3, 26 * u, 4 * u);
-    g.fillStyle = '#3d4650'; g.fillRect(x - 30 * u, y0 - 4 * u, 70 * u, 6 * u);
-  }
-
-  function rocket(x, yb, u, flame) {
-    var bw = 28 * u, bh = 130 * u;
-    if (flame > 0) {
-      var L = (80 + Math.random() * 30) * u * flame, W = 13 * u * (.6 + .4 * flame);
-      var fg = g.createLinearGradient(0, yb, 0, yb + L);
-      fg.addColorStop(0, 'rgba(255,250,200,.98)'); fg.addColorStop(.35, 'rgba(255,170,40,.92)'); fg.addColorStop(1, 'rgba(255,80,20,0)');
-      g.fillStyle = fg;
-      g.beginPath(); g.moveTo(x - W, yb); g.quadraticCurveTo(x, yb + L * 1.1, x + W, yb); g.closePath(); g.fill();
-    }
-    g.fillStyle = '#b8322a';
-    g.beginPath(); g.moveTo(x - bw / 2, yb - 40 * u); g.lineTo(x - bw / 2 - 16 * u, yb + 2 * u); g.lineTo(x - bw / 2, yb); g.closePath(); g.fill();
-    g.beginPath(); g.moveTo(x + bw / 2, yb - 40 * u); g.lineTo(x + bw / 2 + 16 * u, yb + 2 * u); g.lineTo(x + bw / 2, yb); g.closePath(); g.fill();
-    g.fillStyle = '#f2f3f5'; g.fillRect(x - bw / 2, yb - bh, bw, bh);
-    g.fillStyle = 'rgba(0,0,0,.14)'; g.fillRect(x, yb - bh, bw / 2, bh);
-    g.fillStyle = '#d8392b';
-    g.beginPath(); g.moveTo(x - bw / 2, yb - bh); g.quadraticCurveTo(x - bw / 2 + 2 * u, yb - bh - 34 * u, x, yb - bh - 46 * u);
-    g.quadraticCurveTo(x + bw / 2 - 2 * u, yb - bh - 34 * u, x + bw / 2, yb - bh); g.closePath(); g.fill();
-    g.fillStyle = '#20252d';
-    g.fillRect(x - bw / 2, yb - bh * .62, bw, 9 * u);
-    g.fillRect(x - bw / 2, yb - bh * .22, bw, 9 * u);
-    g.fillStyle = '#4aa3df'; g.beginPath(); g.arc(x, yb - bh * .82, 5 * u, 0, 6.2832); g.fill();
-    g.strokeStyle = '#20252d'; g.lineWidth = Math.max(1, 1.5 * u); g.stroke();
-    g.fillStyle = '#3d4650'; g.fillRect(x - 7 * u, yb, 14 * u, 4 * u);
-  }
-
-  var puffs = [], LIFE = 5000, start = null, lastEmit = 0;
-  var IDLE = 2000, IGNITE = 3500, FLIGHT = 9000, CYCLE = 15500;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function frame(now) {
-    if (start === null) start = now;
-    var T = (now - start) % CYCLE;
-    var u = Math.max(.6, h / 800), x = Math.max(70, w * .16), y0 = h * .8 + 6 * u;
-    g.drawImage(bg, 0, 0);
-
-    var lift = 0, flame = 0, flying = false;
-    if (T >= IDLE) flame = Math.min(1, (T - IDLE) / 700);
-    if (T >= IGNITE) {
-      flying = true;
-      var tf = T - IGNITE, D = y0 + 260 * u, acc = 2 * D / (FLIGHT * FLIGHT);
-      lift = .5 * acc * tf * tf;
-      if (tf > FLIGHT) { flying = false; flame = 0; lift = D + 1; }
-    }
-    var yb = y0 - lift;
-
-    if (T >= IDLE && now - lastEmit > 32) {
-      lastEmit = now;
-      if (T < IGNITE + 3500) {
-        var dir = Math.random() < .5 ? -1 : 1;
-        puffs.push({ x: x + (Math.random() - .5) * 30 * u, y: y0 - 3 * u, vx: dir * (.01 + Math.random() * .03) * u, r: 10 * u, grow: 50 * u, a: .6, born: now });
-      }
-      if (flying && yb < y0 - 6 * u && yb > -60 * u)
-        puffs.push({ x: x + (Math.random() - .5) * 4 * u, y: yb + 6 * u, vx: (Math.random() - .5) * .01, r: 6 * u, grow: 30 * u, a: .5, born: now });
-    }
-    puffs = puffs.filter(function (p) { return now - p.born < LIFE; });
-
-    tower(x, y0, u);
-    for (var i = 0; i < puffs.length; i++) {
-      var p = puffs[i], age = now - p.born, k = age / LIFE, r = p.r + k * p.grow, al = p.a * Math.pow(1 - k, 1.3);
-      var cx = p.x + p.vx * age, gg = g.createRadialGradient(cx, p.y, 0, cx, p.y, r);
-      gg.addColorStop(0, 'rgba(240,242,246,' + al.toFixed(3) + ')'); gg.addColorStop(1, 'rgba(240,242,246,0)');
-      g.fillStyle = gg; g.fillRect(cx - r, p.y - r, r * 2, r * 2);
-    }
-    if (lift < y0 + 260 * u) rocket(x, yb, u, flame);
-
-    g.fillStyle = 'rgba(5,25,15,.22)'; g.fillRect(0, 0, w, h);
-    if (!reduce) requestAnimationFrame(frame);
-  }
-
-  function resize() { drawScene(); if (reduce) frame(0); }
-  resize();
-  window.addEventListener('resize', resize);
-  if (!reduce) requestAnimationFrame(frame);
-})();
-</script>
 </body>
 </html>
